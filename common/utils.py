@@ -257,6 +257,8 @@ def load_document4baseline(config, tokenizer):
 
 def load_document4baseline_from_local(config):
     try:
+        print("Using temporary Hacks! Calling savedataset!")
+        save_datasets(config)
         train_input_ids, train_labels, train_users, train_products = load_baselines_datasets(
             DATASET_PATH_MAP[config.dataset], field='train', strategy=config.BASE.strategy)
         dev_input_ids, dev_labels, dev_users, dev_products = load_baselines_datasets(
