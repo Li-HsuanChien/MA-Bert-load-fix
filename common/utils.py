@@ -188,9 +188,20 @@ def load_baselines_datasets(path, field='train', strategy='tail'):
 
 
 def load_attr_vocab(dataset, users, products):
+    usr_path = os.path.join(DATASET_PATH_MAP[dataset], 'usr.pt')
+    prd_path = os.path.join(DATASET_PATH_MAP[dataset], 'prd.pt')
     try:
-        usr_itos, usr_stoi = load_vocab(DATASET_PATH_MAP[dataset], field='usr')
-        prd_itos, prd_stoi = load_vocab(DATASET_PATH_MAP[dataset], field='prd')
+        if os.path.exists(usr_path) and os.path.exists(prd_path):
+            usr_itos, usr_stoi = load_vocab(DATASET_PATH_MAP[dataset], field='usr')
+            prd_itos, prd_stoi = load_vocab(DATASET_PATH_MAP[dataset], field='prd')
+        else:
+            # Build the vocab and save it if the files don't exist
+            usr_vocab = build_vocab(users)
+            prd_vocab = build_vocab(products)
+            save_vectors(DATASET_PATH_MAP[dataset], usr_vocab, field='usr')
+            save_vectors(DATASET_PATH_MAP[dataset], prd_vocab, field='prd')
+            usr_itos, usr_stoi = load_vocab(DATASET_PATH_MAP[dataset], field='usr')
+            prd_itos, prd_stoi = load_vocab(DATASET_PATH_MAP[dataset], field='prd')
     except:
         usr_vocab = build_vocab(users)
         prd_vocab = build_vocab(products)
