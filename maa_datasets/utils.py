@@ -151,8 +151,8 @@ def clean_document(document):
 
 
 def build_vocab(counter):
-    from torchtext.vocab import Vocab
-    vocab = Vocab(counter=counter, specials=[], vectors=None)
+    from torchtext.vocab import vocab
+    vocab = vocab(counter=counter, specials=[], vectors=None)
     return vocab
 
 def generate_sents(docuemnt, max_length=230):
