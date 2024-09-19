@@ -174,17 +174,17 @@ def processor4baseline_over_one_example(text, tokenizer, config):
 
 def save_vectors(path, vocab, field='usr'):
     # itos, stoi, vectors, dim
-    data = vocab.itos, vocab.stoi
+    data = vocab.get_itos(), vocab.get_stoi()
     torch.save(data, os.path.join(path, '{}.pt'.format(field)))
 
 
 def load_vocab(path, field='usr'):
     # itos, stoi, vectors, dim
-    return torch.load(os.path.join(path, '{}.pt'.format(field)), weights_only=True)
+    return torch.load(os.path.join(path, '{}.pt'.format(field)))
 
 
 def load_baselines_datasets(path, field='train', strategy='tail'):
-    return torch.load(os.path.join(path, '{}_{}.pt'.format(field, strategy)), weights_only=True)
+    return torch.load(os.path.join(path, '{}_{}.pt'.format(field, strategy)))
 
 
 def load_attr_vocab(dataset, users, products):
