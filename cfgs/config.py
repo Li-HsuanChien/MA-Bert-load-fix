@@ -72,8 +72,9 @@ __C.seed = random.randint(0, 99999999)
 __C.version = 'default'
 
 __C.model = 'model'
-
-__C.model_save_path = osp.join(__C.ckpts_path, __C.version)
+#Unsure Hack, unify all save model path to saved_model
+__C.model_save_path = 'saved_model'
+# __C.model_save_path = osp.join(__C.ckpts_path, __C.version)
 
 __C.log_path = 'logs'
 
