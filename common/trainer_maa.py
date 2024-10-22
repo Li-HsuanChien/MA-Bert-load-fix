@@ -7,11 +7,12 @@ from common.utils import multi_acc, multi_mse, load_document4baseline_from_local
 from models.get_optim import get_Adam_optim, get_Adam_optim_v2
 from models.model import MAAModel
 
-SAVED_MODEL_PATH = 'saved_model'
+
 
 class MAATrainer(object):
     def __init__(self, config):
         self.config = config
+        SAVED_MODEL_PATH = config.model_save_path
         from transformers import BertTokenizer
         pretrained_weights = 'bert-base-uncased'
         self.tokenizer = BertTokenizer.from_pretrained(pretrained_weights)
